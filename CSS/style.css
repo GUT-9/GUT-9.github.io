@@ -1,0 +1,36 @@
+*{
+    margin:0;
+    padding:0;
+
+}
+/*background:no-repeat center/0.0001% url("../img/BG.JPG");*/
+.logo{
+    width:100%;
+    text-align:center;
+    background:black;
+
+}
+.logo h1{
+    font-size:10px;
+    background:black;
+    colour:white;
+
+}
+
+.nav{
+    width:100%;
+
+
+}
+.nav ul{
+    width:100%;
+    display:flex;
+    justify-content:center;
+
+}
+
+.nav ul li{
+    list-style:none;
+    margin:0 20px;
+
+}
