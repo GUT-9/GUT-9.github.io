@@ -9,13 +9,13 @@
 .nav{
     width:100%;
     text-align:left;
-    background:black;
+    background: #000000;
 }
 
 
 .logo h1{
     font-size:30px;
-    background:black;
+    background: #000000;
     color:white;
 
 }
