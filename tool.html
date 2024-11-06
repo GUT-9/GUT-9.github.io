@@ -44,7 +44,6 @@
         width: 120px;  /* 调整下拉框的宽度 */
     }
 
-
 </style>
 <script>
     // 用于动态设置隐藏字段的值并切换搜索引擎
@@ -58,15 +57,21 @@
         var searchEngine = document.querySelector('select[name="engine"]').value;  // 获取选择的搜索引擎
         var form = document.querySelector('form');
 
-        if (searchEngine === 'baidu') {
-            form.action = 'https://www.baidu.com/s';  // 设置百度搜索链接
-            document.querySelector('.realQuery').name = 'wd';  // 百度的查询参数是 'wd'
-        } else if (searchEngine === 'bing') {
+        if (searchEngine === 'bing') {
             form.action = 'https://www.bing.com/search';  // 设置Bing搜索链接
             document.querySelector('.realQuery').name = 'q';  // Bing的查询参数是 'q'
+        } else if (searchEngine === 'baidu') {
+            form.action = 'https://www.baidu.com/s';  // 设置百度搜索链接
+            document.querySelector('.realQuery').name = 'wd';  // 百度的查询参数是 'wd'
         }
     }
+
+    // 页面加载时初始化默认搜索引擎
+    window.onload = function() {
+        changeSearchEngine();  // 页面加载时确保选项和表单参数一致
+    };
 </script>
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="google-site-verification" content="6aU3a2iCOifzXTx3qc9LSPjTOjp4OvQFXtM4eFtHX4I" />
@@ -112,7 +117,6 @@
         </table>
     </div>
 </div>
-
 
 <form class="navbar-form navbar-right site-search" action="https://www.baidu.com/s" target="_blank" onsubmit="setQueryValue()">
     <table  style="width: 95%; text-align: center;">
