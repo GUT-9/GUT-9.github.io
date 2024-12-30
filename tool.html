@@ -44,6 +44,22 @@
         width: 120px;  /* 调整下拉框的宽度 */
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 <script>
     // 用于动态设置隐藏字段的值并切换搜索引擎
@@ -82,7 +98,12 @@
     <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css"/>
     <link rel="shortcut icon"type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
 </head>
-<body background="img/BG.JPG"style="background-repeat:no-repeat;background-attachment:fixed;background-size:cover;background-position:center;"> <!--style内为样式,最后一个为居中-->
+<body background="img/BG.JPG"style="
+background-repeat:no-repeat;
+background-attachment:fixed;
+background-size:cover;
+background-position:center;
+min-width: 875px;"> <!--style内为样式,最后一个为居中-->
 <div class="nav">
     <div class="logo">
         <!--表格实现头部导航栏与logo样式-->
@@ -144,26 +165,53 @@
     </table>
 </form>
 
-<table border="0" style="width: 50%; text-align: center;margin-left: auto; margin-right: auto;">
+<table  border="0" style="
+min-width: 875px;
+width: 55%;
+text-align:center;
+margin-left: auto;
+margin-right: auto;
+border-collapse: collapse;"><!--boder 表格线显示-->
     <tr>
         <th height="100"></th>
     </tr>
+
     <tr>
-        <td  target="_blank" width="110px">
-            <p  style="color: #d8d8d8;font-size:30px">AI工具:</p>
+        <td  target="_blank" width="110px" >
+            <p  style="text-align:right;color: #d8d8d8;font-size:30px">AI工具:</p>
         </td>
         <td style="vertical-align: middle;">
-            <a href="https://chatgpt.com/"  target="_blank" style="vertical-align: middle;font-size:50px ">
-                <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT"  height="90PX"> ChatGPT
+            <a href="https://chatgpt.com/"  target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:50px ">
+                <img src="img/MyImage/tool/favicon.ico" alt="ChatGPT"  height="90PX"> ChatGPT
             </a>
         </td>
         <td>
-            <a href="https://kimi.moonshot.cn/" target="_blank" style="vertical-align: middle;font-size:50px ">
+            <a href="https://kimi.moonshot.cn/" target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:50px ">
                 <img src="img/MyImage/tool/kimi.png" alt="Kimi" width="96" height="97"> Kimi
             </a>
         </td>
     </tr>
+    <tr>
+        <th height="15"></th>
+    </tr>
+    <tr >
+        <td  target="_blank" width="150px">
+            <p  style="text-align:right;color: #d8d8d8;font-size:30px">开源平台:</p>
+        </td>
+        <td style="vertical-align: middle;" >
+            <a href="https://github.com/"  target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:50px ">
+                <img src="img/MyImage/tool/github-mark.png" alt="GitHub"  height="90PX"> GitHub
+            </a>
+        </td>
+        <td>
+            <a href="https://oshwhub.com/" target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:40px ">
+                <img src="img/MyImage/tool/OSHWHub.jpg" alt="立创开源平台" width="96" height="90">立创开源平台
+            </a>
+        </td>
+    </tr>
+
 </table>
+
 
 
 
