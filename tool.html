@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<style>
+    a{color: #d8d8d8;
+        font-size:20px;
+    }
+    a{text-decoration:none}
+    a:hover{color: #fff
+    }
+    /* 增加字体大小和元素间距 */
+    .form-group {
+        margin: 10px 0;
+    }
+
+    select, input, button {
+        font-size: 18px;  /* 调整字体大小 */
+        padding: 10px;    /* 增加内边距 */
+        border-radius: 5px;  /* 圆角边框 5 */
+        text-align: center;
+
+    }
+
+    input[type="text"] {
+        text-align: left;
+        width: 100%;  /* 调整输入框的宽度 300px*/
+
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 12px 20px;  /* 增加按钮的内边距 */
+        font-size: 18px;     /* 增加按钮的字体大小 */
+    }
+
+    button:hover {
+        background-color: #0056b3;  /* 鼠标悬停时的颜色变化 */
+    }
+
+    select {
+        width: 120px;  /* 调整下拉框的宽度 */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<script>
+    // 用于动态设置隐藏字段的值并切换搜索引擎
+    function setQueryValue() {
+        var query = document.querySelector('input[name="query"]').value;  // 获取用户输入的内容
+        document.querySelector('.realQuery').value = query;  // 将用户输入的内容赋值给隐藏字段
+    }
+
+    // 根据选择的搜索引擎更新表单的 action
+    function changeSearchEngine() {
+        var searchEngine = document.querySelector('select[name="engine"]').value;  // 获取选择的搜索引擎
+        var form = document.querySelector('form');
+
+        if (searchEngine === 'bing') {
+            form.action = 'https://www.bing.com/search';  // 设置Bing搜索链接
+            document.querySelector('.realQuery').name = 'q';  // Bing的查询参数是 'q'
+        } else if (searchEngine === 'baidu') {
+            form.action = 'https://www.baidu.com/s';  // 设置百度搜索链接
+            document.querySelector('.realQuery').name = 'wd';  // 百度的查询参数是 'wd'
+        }
+    }
+
+    // 页面加载时初始化默认搜索引擎
+    window.onload = function() {
+        changeSearchEngine();  // 页面加载时确保选项和表单参数一致
+    };
+</script>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="google-site-verification" content="6aU3a2iCOifzXTx3qc9LSPjTOjp4OvQFXtM4eFtHX4I" />
+    <meta name="360-site-verification" content="459d16299edf4e5119a228981ca5fb2e" />
+    <meta name="description" content="九维空间（傅天吉）的个人网站"/>
+
+    <title>九维的个人主页</title>
+    <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
+</head>
+<body background="img/BG.JPG" style="
+background-repeat:no-repeat;
+background-attachment:fixed;
+background-size:cover;
+background-position:center;
+min-width:1080px;"> <!--style内为样式,最后一个为居中-->
+<div class="nav">
+    <div class="logo">
+        <!--表格实现头部导航栏与logo样式-->
+        <table border="0" width="100%">
+            <tr>
+                <td width="148px"> <img src="img/MyImage/GUT9.png"></td>
+                <td width="270px" ><h1 align="left" >九维空间的个人主页</h1></td>
+                <td ></td>
+                <td width="630px">
+                    <ul >
+                        <li>
+                            <a  href="index.html" >主页</a>
+                        </li>
+                        <li>
+                            <a href="tool.html">工具</a>
+                        </li>
+                        <li>
+                            <a href="index.html">项目经历</a>
+                        </li>
+                        <li>
+                            <a href="My_award.html">获奖经历</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/GUT-9" target="_blank">GitHub</a>
+                        </li>
+                        <li>
+                            <a href="https://space.bilibili.com/610816901" target="_blank">哔哩哔哩</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<form class="navbar-form navbar-right site-search" action="https://www.baidu.com/s" target="_blank" onsubmit="setQueryValue()">
+    <table  style="width: 95%; text-align: center;">
+
+        <tr>
+            <td style=" text-align: right;">
+                <!-- 搜索引擎选择下拉框 -->
+                <div class="form-group" >
+                    <select name="engine" class="form-control" onchange="changeSearchEngine()" style="background-color: #007bff;color: #FFFFFF">
+                        <option value="bing">Bing</option>
+                        <option value="baidu">百度</option>
+                    </select>
+                </div>
+            </td>
+            <td >
+                <div class="form-group">
+                    <input type="text" name="query" class="form-control" placeholder="搜索" value="" >
+                    <input type="hidden" class="realQuery" name="wd" value="" >
+                </div>
+            </td>
+            <td style=" text-align: left;">
+                <button type="submit" class="btn btn-default">搜索</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<table  border="0" style="
+min-width: 875px;
+width: 55%;
+text-align:center;
+margin-left: auto;
+margin-right: auto;
+border-collapse: collapse;"><!--boder 表格线显示-->
+    <tr>
+        <th height="100"></th>
+    </tr>
+
+    <tr>
+        <td  target="_blank" width="110px" >
+            <p  style="text-align:right;color: #d8d8d8;font-size:30px">AI工具:</p>
+        </td>
+        <td style="vertical-align: middle;">
+            <a href="https://chatgpt.com/"  target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:50px ">
+                <img src="img/MyImage/tool/favicon.ico" alt="ChatGPT"  height="90PX"> ChatGPT
+            </a>
+        </td>
+        <td>
+            <a href="https://kimi.moonshot.cn/" target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:50px ">
+                <img src="img/MyImage/tool/kimi.png" alt="Kimi" width="96" height="97"> Kimi
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <th height="15"></th>
+    </tr>
+    <tr >
+        <td  target="_blank" width="150px">
+            <p  style="text-align:right;color: #d8d8d8;font-size:30px">开源平台:</p>
+        </td>
+        <td style="vertical-align: middle;" >
+            <a href="https://github.com/"  target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:50px ">
+                <img src="img/MyImage/tool/github-mark.png" alt="GitHub"  height="90PX"> GitHub
+            </a>
+        </td>
+        <td>
+            <a href="https://oshwhub.com/" target="_blank" style="display: flex; align-items: center; justify-content: center;vertical-align: middle;font-size:40px ">
+                <img src="img/MyImage/tool/OSHWHub.jpg" alt="立创开源平台" width="96" height="90">立创开源平台
+            </a>
+        </td>
+    </tr>
+
+</table>
+
+
+
+
+<div class="foot">
+    &copy;九维空间(傅天吉） 版权所有
+</div>
+
+</body>
+</html>
