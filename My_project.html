@@ -2,162 +2,161 @@
 <html lang="ch">
 
 <style>
-    a{color: #d8d8d8;
-        font-size:20px;
-    }
-    a{text-decoration:none}
-    a:hover{color: #fff
+    a {
+        color: #d8d8d8;
+        font-size: 20px;
     }
 
-
-
-
-
-    .award{
-      flex: 1;
-      margin: 0 10px;
-      text-align: center;
-      margin-top:50px;
+    a {
+        text-decoration: none
     }
 
-    .award2 img {
-      max-width: 75%;
-      height: auto;
-      width: 75%;
-
+    a:hover {
+        color: #fff
     }
 
-    .award2 p {
-      font-size: 35px;
-      color: #FFF;
-      margin-top: 10px;
+    .project {
+        margin: 40px auto;
+        max-width: 900px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 25px;
     }
 
-
-
-    .award1 img {
-      max-width: 45%;
-      height: auto;
-      width: 45%;
-
-    }
-    .award1 p {
-      font-size: 35px;
-      color: #FFF;
-      margin-top: 10px;
+    .project-title {
+        font-size: 26px;
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 15px;
     }
 
-     /* 16:9 自适应容器 */
- .bili-wrapper {
-     position: relative;
-     width: 100%;          /* 随父级宽度 */
-     height: 0;            /* 关键：本身高度为 0 */
-     padding-bottom: 56.25%; /* 9÷16=0.5625，保证 16:9 比例 */
- }
+    .project-content {
+        font-size: 17px;
+        color: #e8e8e8;
+        line-height: 1.6;
+        text-align: left;
+        margin: 20px 0;
+    }
 
-/* 让 iframe 铺满这个比例盒子 */
-.bili-wrapper iframe {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
+    .project-highlight {
+        color: #4fc3f7;
+    }
 
+    .project-date {
+        font-size: 14px;
+        color: #b0b0b0;
+        margin-top: 15px;
+    }
 
+    .bili-wrapper {
+        position: relative;
+        width: 95%;
+        height: 0;
+        padding-bottom: 53.4%; /* 16:9比例 */
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .bili-wrapper iframe {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .project-achievement {
+        color: #4ecdc4;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 12px 0;
+    }
+
+    .project-tech {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin: 12px 0;
+    }
 </style>
 
 <head>
     <meta charset="UTF-8">
     <title>九维的个人主页</title>
     <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css"/>
-    <link rel="shortcut icon"type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
+    <link rel="shortcut icon" type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
 </head>
-<body background="img/BG.JPG"style="min-width: 1080px;background-repeat:no-repeat;background-attachment:fixed;background-size:cover;background-position:center;"> <!--style内为样式,最后一个为居中-->
-    <div class="nav">
-        <div class="logo">
-            <!--表格实现头部导航栏与logo样式-->
-            <table border="0" width="100%">
-                <tr>
-                    <td width="148px"> <img src="img/MyImage/GUT9.png"></td>
-                    <td width="270px" ><h1 align="left" >九维空间的个人主页</h1></td>
-                    <td ></td>
-                    <td width="630px">
-                        <ul >
-                            <li>
-                                <a  href="index.html" >主页</a>
-                            </li>
-                            <li>
-                                <a href="tool.html">工具</a>
-                            </li>
-                            <li>
-                                <a href="My_project.html">项目经历</a>
-                            </li>
-                            <li>
-                                <a href="My_award.html">获奖经历</a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/GUT-9" target="_blank">GitHub</a>
-                            </li>
-                            <li>
-                                <a href="https://space.bilibili.com/610816901" target="_blank">哔哩哔哩</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
 
-<!-- 1. 在你页面里任意位置放这个盒子 -->
-<div class="bili-wrapper">
-    <iframe
-            src="//player.bilibili.com/player.html?isOutside=true&aid=489546899&bvid=BV1jN41187p9&cid=1229115532&p=1&high_quality=1&autoplay=0"
-            scrolling="no"
-            frameborder="no"
-            allowfullscreen="true">
-    </iframe>
+<body background="img/BG.JPG" style="min-width: 1080px;background-repeat:no-repeat;background-attachment:fixed;background-size:cover;background-position:center;">
+<div class="nav">
+    <div class="logo">
+        <!--表格实现头部导航栏与logo样式-->
+        <table border="0" width="100%">
+            <tr>
+                <td width="148px"> <img src="img/MyImage/GUT9.png"></td>
+                <td width="270px"><h1 align="left">九维空间的个人主页</h1></td>
+                <td></td>
+                <td width="630px">
+                    <ul>
+                        <li>
+                            <a href="index.html">主页</a>
+                        </li>
+                        <li>
+                            <a href="tool.html">工具</a>
+                        </li>
+                        <li>
+                            <a href="My_project.html">项目经历</a>
+                        </li>
+                        <li>
+                            <a href="My_award.html">获奖经历</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/GUT-9" target="_blank">GitHub</a>
+                        </li>
+                        <li>
+                            <a href="https://space.bilibili.com/610816901" target="_blank">哔哩哔哩</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 
 
-
-    <div class="award award5">
-        <img src="img/MyImage/award/数模省二.png" style="max-width: 75%;height: auto;width: 75%;" loading="lazy" alt=""> <!--懒惰加载方式仅加载当前可见的-->
-        <p style="font-size: 35px;color: #FFF;margin-top: 10px;">在全国大学生数学建模竞赛中<br>获得湖北省二等奖</p>
-        <font size="1px" color="#fff">2024.9</font>
+<div class="project">
+    <div class="bili-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=489546899&bvid=BV1jN41187p9&cid=1229115532&p=1&high_quality=1&autoplay=0"
+                scrolling="no"
+                frameborder="no"
+                allowfullscreen="true">
+        </iframe>
     </div>
 
-    <div class="award award4">
-        <img src="img/MyImage/award/2024电赛本科组省三.jpg" style="max-width: 75%;height: auto;width: 75%;" loading="lazy"> <!--懒惰加载方式仅加载当前可见的-->
-        <p style="font-size: 35px;color: #FFF;margin-top: 10px;">在全国大学生电子设计竞赛（湖北赛区TI杯）中<br>获得本科组三等奖</p>
-        <font size="1px" color="#fff">2024.8</font>
+    <div class="project-title">
+        基于FFT的辨音识键奏乐系统
     </div>
 
-    <div class="award award3">
-         <img src="img/MyImage/award/shumu.png" style="max-width: 75%;height: auto;width: 75%;">
-         <p style="font-size: 35px;color: #FFF;margin-top: 10px;">在全国大学生数学建模竞赛中<br>获得全国二等奖</p>
-         <font size="1px" color="#fff">2023.9</font>
+    <div class="project-achievement">
+        全国大学生电子设计竞赛全国一等奖 · 湖北省TI杯（特等奖）
     </div>
 
-    <div class="award award2">
-         <img src="img/MyImage/award/TI发言.png">
-         <p>在全国大学生电子设计竞赛中<br>获得湖北省TI杯<br>并作为获奖代表发言</p>
-         <font size="1px" color="#fff">2023.10</font>
+    <div class="project-content">
+        <div class="project-tech">
+            <span class="project-highlight">项目职责：</span>整体系统硬件设计 · 程序编写与优化
+        </div>
+
+        该项目利用硬件系统对音频信号进行ADC采集，通过傅里叶变换进行频域分析。
+        对分析结果进行加权处理以提取主特征频率，与成熟设备对比结果显示，
+        在目标<span class="project-highlight">3KHz</span>附近频率识别精度达到<span class="project-highlight">±1Hz</span>的误差范围。
     </div>
 
-    <div class="award award1">
-        <img src="img/MyImage/award/TIGNo1.jpg">
-        <img src="img/MyImage/award/TI杯抠图后.png" style="width: 30%;">
-        <p>在全国大学生电子设计竞赛中<br>获全国一等奖兼湖北省TI杯</p>
-        <font size="3px" color="#fff">2023.8</font>
-    </div>
-
-    <div class="award_dgb" style="flex: 1;margin: 0 10px;text-align: center;margin-top:50px;">
-        <img src="img/MyImage/award/dgb.jpg" style="max-width: 75%;height: auto;width: 35%;">
-        <p style="font-size: 35px;color: #FFF;margin-top: 10px;">在全国大学生电工数学建模竞赛中<br>获得本科组全国三等奖</p>
-        <font size="1px" color="#fff">2023.5</font>
-    </div>
+    <div class="project-date">2024.9</div>
+</div>
 
 
 
