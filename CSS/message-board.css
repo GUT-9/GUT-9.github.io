@@ -1,0 +1,94 @@
+/* message-board.css - 留言板页面专用样式 */
+a { color: #d8d8d8; font-size: 20px; text-decoration: none; }
+a:hover { color: #fff; }
+
+.message-container {
+    width: 80%; max-width: 900px; margin: 50px auto; padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); border-radius: 10px;
+    backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.message-form {
+    margin-bottom: 30px; padding: 25px;
+    background-color: rgba(255, 255, 255, 0.05); border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.message-form h2, .messages-list h2 {
+    color: #fff; margin-bottom: 20px; text-align: center;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+.message-form .form-group { margin-bottom: 20px; }
+.message-form .form-group label {
+    display: block; color: #d8d8d8; margin-bottom: 8px; font-size: 16px;
+}
+.message-form .form-group input,
+.message-form .form-group textarea {
+    width: 100%; padding: 12px; border: 1px solid #555; border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.08); color: #fff;
+    font-size: 16px; font-family: "Microsoft YaHei", sans-serif;
+    transition: border-color 0.3s;
+}
+.message-form .form-group input:focus,
+.message-form .form-group textarea:focus {
+    outline: none; border-color: #4CAF50; background-color: rgba(255, 255, 255, 0.12);
+}
+.message-form .form-group textarea { height: 120px; resize: vertical; }
+.submit-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white;
+    padding: 14px 28px; border: none; border-radius: 6px; cursor: pointer;
+    font-size: 16px; width: 100%; font-weight: bold;
+    transition: all 0.3s; font-family: "Microsoft YaHei", sans-serif;
+}
+.submit-btn:hover {
+    background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+    transform: translateY(-2px); box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+.submit-btn:disabled { background: #666; cursor: not-allowed; transform: none; box-shadow: none; }
+.loading {
+    display: inline-block; width: 20px; height: 20px;
+    border: 3px solid rgba(255, 255, 255, .3); border-radius: 50%;
+    border-top-color: #fff; animation: spin 1s ease-in-out infinite;
+    margin-right: 8px; vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.messages-list { margin-top: 30px; }
+.message-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #4CAF50; margin-bottom: 15px; padding: 18px;
+    border-radius: 6px; transition: all 0.3s; animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.message-item:hover {
+    background-color: rgba(255, 255, 255, 0.08); transform: translateX(5px);
+}
+.message-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px; flex-wrap: wrap;
+}
+.message-author { color: #4CAF50; font-weight: bold; font-size: 16px; }
+.message-time { color: #aaa; font-size: 14px; font-family: monospace; }
+.message-content { color: #e0e0e0; line-height: 1.6; font-size: 15px; word-wrap: break-word; }
+.no-messages { color: #aaa; text-align: center; padding: 40px 20px; font-size: 16px; }
+.error-message {
+    color: #ff6b6b; background-color: rgba(255, 107, 107, 0.1);
+    border: 1px solid #ff6b6b; padding: 12px; border-radius: 6px;
+    margin: 10px 0; text-align: center; display: none;
+}
+.success-message {
+    color: #4CAF50; background-color: rgba(76, 175, 80, 0.1);
+    border: 1px solid #4CAF50; padding: 12px; border-radius: 6px;
+    margin: 10px 0; text-align: center; display: none;
+}
+.refresh-btn {
+    background-color: rgba(255, 255, 255, 0.1); color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 16px;
+    border-radius: 4px; cursor: pointer; margin-left: 10px;
+    font-size: 14px; transition: all 0.3s;
+}
+.refresh-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+.messages-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px;
+}

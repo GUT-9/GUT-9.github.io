@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 - 九维的个人主页</title>
+    <meta name="baidu-site-verification" content="codeva-DK7ZQePT0x" />
+    <meta name="description" content="九维空间（傅天吉）的个人网站 - 留言板"/>
+    <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css"/>
+    <!-- 引入留言板专用样式 -->
+    <link rel="stylesheet" type="text/css" href="CSS/message-board.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
+    <!-- 引入 LeanCloud SDK 和留言板逻辑 -->
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av-min.js"></script>
+    <script src="scripts/message-board.js"></script>
+</head>
+<body background="img/BG.JPG" style="
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    background-position:center;
+    min-width:1080px;">
+
+<!-- 导航栏 -->
+<div class="nav">
+    <div class="logo">
+        <table border="0" width="100%">
+            <tr>
+                <td width="148px"> <img src="img/MyImage/GUT9.png"></td>
+                <td width="270px"><h1 align="left">九维空间的个人主页</h1></td>
+                <td></td>
+                <td width="630px">
+                    <ul>
+                        <li><a href="index.html">主页</a></li>
+                        <li><a href="tool.html">工具</a></li>
+                        <li><a href="My_project.html">项目经历</a></li>
+                        <li><a href="My_award.html">获奖经历</a></li>
+                        <li><a href="https://github.com/GUT-9" target="_blank">GitHub</a></li>
+                        <li><a href="https://space.bilibili.com/610816901" target="_blank">哔哩哔哩</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- 留言板内容 -->
+<div class="message-container">
+    <div id="successMessage" class="success-message"></div>
+    <div id="errorMessage" class="error-message"></div>
+
+    <div class="message-form">
+        <h2>📝 留下你的留言</h2>
+        <form id="messageForm">
+            <div class="form-group">
+                <label for="author">昵称（可选）：</label>
+                <input type="text" id="author" placeholder="匿名用户" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label for="content">留言内容：</label>
+                <textarea id="content" placeholder="请留下你的宝贵意见、建议或祝福..." maxlength="500" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span id="btnLoading" class="loading" style="display: none;"></span>
+                <span id="btnText">发布留言</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="messages-list">
+        <div class="messages-header">
+            <h2>💬 留言列表</h2>
+            <button onclick="loadMessages()" class="refresh-btn">🔄 刷新</button>
+        </div>
+        <div id="messagesContainer">
+            <div class="no-messages">正在加载留言...</div>
+        </div>
+    </div>
+</div>
+
+<!-- 页脚 (包含内联样式的留言板入口，方便复制) -->
+<div class="foot" style="width: 100%; padding: 20px 0 10px 0; font-size: 12px; position: relative;">
+
+    <div style="
+    text-align: center;
+    position: fixed; /* 改为固定定位，和.foot同级 */
+    bottom: 30px; /* 距离页面底部20像素，可根据需要调整 */
+    left: 0;
+    width: 100%;
+    z-index: 99; /* 确保显示在最顶层 */
+">
+        <a href="message_board.html"
+           style="display: inline-block; background-color: rgba(76, 175, 80, 0.2); color: #4CAF50; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 14px; border: 1px solid #4CAF50; font-weight: bold;">
+            💬 前往留言板
+        </a>
+    </div>
+
+
+
+    <div style="color: #333; margin-bottom: 5px;">
+        &copy; 九维空间(傅天吉）版权所有
+    </div>
+    <div style="display: block; text-align: right;">
+        <a href="https://beian.miit.gov.cn/" target="_blank" style="color: #666; text-decoration: none; font-size: 12px;">
+            冀ICP备2025103423号
+        </a>
+    </div>
+</div>
+</body>
+</html>
