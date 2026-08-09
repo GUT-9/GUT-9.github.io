@@ -1,7 +1,7 @@
-// message-board.js - 留言板功能逻辑 (使用 REST API 替代 LeanCloud)
+// message-board.js - 留言板功能逻辑 (使用线上 Vercel API 替代 LeanCloud)
 
-// 后端 API 地址，如果在本地服务运行，可使用相对路径或动态指定
-const API_BASE = window.GUESTBOOK_API_URL || '/api/messages';
+// 默认指向已部署上线的 24/7 Vercel 后端 API
+const API_BASE = window.GUESTBOOK_API_URL || 'https://gut-9-github-io.vercel.app/api/messages';
 
 function showMessage(type, text) {
     const element = document.getElementById(type + 'Message');
