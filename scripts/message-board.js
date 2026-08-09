@@ -1,16 +1,7 @@
-// message-board.js - 留言板功能逻辑
-// 初始化 LeanCloud (请确保在调用任何AV方法前，此代码已执行)
-(function initLeanCloud() {
-    const APP_ID = '4oNT3kc8u2ZyRBHTCXkVkr88-gzGzoHsz';
-    const APP_KEY = 'r1OWnFQNbJ7iJHgusSGtQfem';
-    AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY,
-        serverURLs: 'https://4ont3kc8.lc-cn-n1-shared.com'
-    });
-})();
+// message-board.js - 留言板功能逻辑 (使用 REST API 替代 LeanCloud)
 
-const Message = AV.Object.extend('Message');
+// 后端 API 地址，如果在本地服务运行，可使用相对路径或动态指定
+const API_BASE = window.GUESTBOOK_API_URL || '/api/messages';
 
 function showMessage(type, text) {
     const element = document.getElementById(type + 'Message');
@@ -24,33 +15,35 @@ async function loadMessages() {
     const container = document.getElementById('messagesContainer');
     if (!container) return;
     try {
-        const query = new AV.Query('Message');
-        query.descending('createdAt');
-        const messages = await query.find();
+        const response = await fetch(API_BASE);
+        if (!response.ok) {
+            throw new Error(`网络响应错误 HTTP ${response.status}`);
+        }
+        const messages = await response.json();
 
-        if (messages.length === 0) {
+        if (!messages || messages.length === 0) {
             container.innerHTML = '<div class="no-messages">还没有留言，快来第一个留言吧！</div>';
             return;
         }
 
         let html = '';
         messages.forEach(msg => {
-            const time = new Date(msg.get('createdAt')).toLocaleString('zh-CN');
+            const time = msg.createdAt ? new Date(msg.createdAt).toLocaleString('zh-CN') : '未知时间';
             html += `
-                    <div class="message-item" data-id="${msg.id}">
-                        <div class="message-header">
-                            <span class="message-author">${escapeHtml(msg.get('author') || '匿名用户')}</span>
-                            <span class="message-time">${time}</span>
-                        </div>
-                        <div class="message-content">${escapeHtml(msg.get('content'))}</div>
+                <div class="message-item" data-id="${msg.id}">
+                    <div class="message-header">
+                        <span class="message-author">${escapeHtml(msg.author || '匿名用户')}</span>
+                        <span class="message-time">${time}</span>
                     </div>
-                `;
+                    <div class="message-content">${escapeHtml(msg.content)}</div>
+                </div>
+            `;
         });
         container.innerHTML = html;
     } catch (error) {
         console.error('加载留言失败:', error);
         showMessage('error', '加载留言失败: ' + (error.message || '未知错误'));
-        container.innerHTML = '<div class="no-messages">加载留言失败，请检查控制台或刷新重试</div>';
+        container.innerHTML = '<div class="no-messages">加载留言失败，请检查后端 API 服务或刷新重试</div>';
     }
 }
 
@@ -65,10 +58,22 @@ async function submitMessage(author, content) {
     btnLoading.style.display = 'inline-block';
 
     try {
-        const message = new Message();
-        message.set('author', author || '匿名用户');
-        message.set('content', content);
-        await message.save();
+        const response = await fetch(API_BASE, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                author: author || '匿名用户',
+                content: content
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || `HTTP ${response.status}`);
+        }
 
         showMessage('success', '留言发布成功！');
         document.getElementById('messageForm').reset();
@@ -84,6 +89,7 @@ async function submitMessage(author, content) {
 }
 
 function escapeHtml(text) {
+    if (!text) return '';
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
@@ -91,7 +97,6 @@ function escapeHtml(text) {
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
-    // 仅当在留言板页面时才执行相关初始化
     if (document.getElementById('messageForm')) {
         loadMessages();
 
