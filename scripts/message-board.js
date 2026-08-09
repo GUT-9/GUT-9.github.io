@@ -1,7 +1,14 @@
-// message-board.js - 留言板功能逻辑 (使用线上 Vercel API 替代 LeanCloud)
+// message-board.js - 留言板功能逻辑 (Supabase 云数据库直连版)
 
-// 默认指向已部署上线的 24/7 Vercel 后端 API
-const API_BASE = window.GUESTBOOK_API_URL || 'https://gut-9-github-io.vercel.app/api/messages';
+const SUPABASE_URL = 'https://iiqjggvsbaidfenbpngz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_nyp_bErLHoI3Ds-2afZ2gw_DwLbDF9O';
+
+const HEADERS = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+};
 
 function showMessage(type, text) {
     const element = document.getElementById(type + 'Message');
@@ -15,7 +22,11 @@ async function loadMessages() {
     const container = document.getElementById('messagesContainer');
     if (!container) return;
     try {
-        const response = await fetch(API_BASE);
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/messages?select=*&order=created_at.desc`, {
+            method: 'GET',
+            headers: HEADERS
+        });
+
         if (!response.ok) {
             throw new Error(`网络响应错误 HTTP ${response.status}`);
         }
@@ -28,7 +39,8 @@ async function loadMessages() {
 
         let html = '';
         messages.forEach(msg => {
-            const time = msg.createdAt ? new Date(msg.createdAt).toLocaleString('zh-CN') : '未知时间';
+            const rawTime = msg.created_at || msg.createdAt;
+            const time = rawTime ? new Date(rawTime).toLocaleString('zh-CN') : '未知时间';
             html += `
                 <div class="message-item" data-id="${msg.id}">
                     <div class="message-header">
@@ -43,7 +55,7 @@ async function loadMessages() {
     } catch (error) {
         console.error('加载留言失败:', error);
         showMessage('error', '加载留言失败: ' + (error.message || '未知错误'));
-        container.innerHTML = '<div class="no-messages">加载留言失败，请检查后端 API 服务或刷新重试</div>';
+        container.innerHTML = '<div class="no-messages">加载留言失败，请刷新重试</div>';
     }
 }
 
@@ -58,21 +70,18 @@ async function submitMessage(author, content) {
     btnLoading.style.display = 'inline-block';
 
     try {
-        const response = await fetch(API_BASE, {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: HEADERS,
             body: JSON.stringify({
                 author: author || '匿名用户',
                 content: content
             })
         });
 
-        const result = await response.json();
-
         if (!response.ok) {
-            throw new Error(result.error || `HTTP ${response.status}`);
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.message || `HTTP ${response.status}`);
         }
 
         showMessage('success', '留言发布成功！');
