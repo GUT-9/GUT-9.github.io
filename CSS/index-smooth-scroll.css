@@ -1,0 +1,551 @@
+/* index-smooth-scroll.css - 永久固定用户精调数值与紧凑间距排版 */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* 🔒 导航栏常驻最顶端 (z-index 99999) */
+.nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 99999 !important;
+    background: #000000 !important;
+    box-sizing: border-box;
+}
+
+/* 隐藏原生浏览器右侧滚动条 */
+html::-webkit-scrollbar, body::-webkit-scrollbar, .scroll-section::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    color: #ffffff;
+    height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* 背景蒙版 */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.88) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 💻 电脑端规则（>= 769px） */
+@media screen and (min-width: 769px) {
+    body {
+        min-width: 1080px;
+    }
+}
+
+.scroll-section {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    padding: 85px 40px 50px 40px;
+    z-index: 2;
+}
+
+/* 右侧侧边小点指示器 */
+.section-dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 6px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dot-item {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(216, 216, 216, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot-item:hover {
+    background: #00bfff;
+    transform: scale(1.3);
+}
+
+.dot-item.active {
+    background: #00bfff;
+    box-shadow: 0 0 12px #00bfff;
+    transform: scale(1.4);
+    border-color: #ffffff;
+}
+
+/* 玻璃拟态卡片 */
+.glass-card {
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 191, 255, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px 0 rgba(0, 191, 255, 0.3);
+    border-color: rgba(0, 191, 255, 0.6);
+}
+
+/* 首屏经典层次排版：左上“这里是九维空间的” + 右下“个人网站” */
+.hero-text-box {
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.hero-title-top {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+    white-space: nowrap;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.95), 0 0 10px rgba(0,0,0,0.8);
+}
+
+.hero-title-bottom {
+    font-size: 4.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.9);
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(216, 216, 216, 0.9);
+    font-size: 14px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.section-header p {
+    color: #d8d8d8;
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.tech-card {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.tech-icon {
+    font-size: 2.2rem;
+    background: rgba(0, 191, 255, 0.12);
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 191, 255, 0.3);
+}
+
+.tech-card h3 {
+    font-size: 1.3rem;
+    color: #00bfff;
+    margin: 0;
+}
+
+.tech-card p {
+    color: #d8d8d8;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.tag-badge {
+    background: rgba(0, 191, 255, 0.1);
+    color: #d8d8d8;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0, 191, 255, 0.25);
+}
+
+.cycling-container {
+    width: 100%;
+    max-width: 1080px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.carousel-box {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+}
+
+.carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-img.active {
+    display: block;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: #00bfff;
+    border-color: #00bfff;
+}
+
+.carousel-prev { left: 12px; }
+.carousel-next { right: 12px; }
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+}
+
+.carousel-dot.active {
+    background: #00bfff;
+    width: 20px;
+    border-radius: 6px;
+}
+
+.cycling-info {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cycling-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.stat-item {
+    background: rgba(0,0,0,0.4);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #00bfff;
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    color: #d8d8d8;
+}
+
+.sports-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1080px;
+}
+
+.sport-card {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sport-badge {
+    align-self: flex-start;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgba(0, 191, 255, 0.15);
+    color: #00bfff;
+    border: 1px solid rgba(0, 191, 255, 0.4);
+}
+
+/* ========================================================================= */
+/* 📱 手机端 (精调固定参数：高度 53px, 左右边距 0, Logo 50px, 菜单字号 7px) */
+/* ========================================================================= */
+@media screen and (max-width: 768px) {
+    html, body {
+        scroll-snap-type: none !important;
+        min-width: 100% !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    /* 1. 导航栏：高度 53px，左右边距 0，消除多余空隙 */
+    .nav {
+        padding: 0 0px !important;
+        height: 53px !important;
+        display: flex !important;
+        align-items: center !important;
+        overflow: hidden !important;
+    }
+    .nav table {
+        width: 100% !important;
+        table-layout: auto !important;
+        border-collapse: collapse !important;
+    }
+    .nav tr {
+        display: table-row !important;
+    }
+    .nav td {
+        display: table-cell !important;
+        white-space: nowrap !important;
+        vertical-align: middle !important;
+        padding: 0 1px !important;
+    }
+
+    /* Logo 高度固定 50px */
+    .logo img {
+        height: 50px !important;
+        width: auto !important;
+        vertical-align: middle;
+    }
+
+    /* 左侧标题与全站其他页面保持完全一致的原版字体 */
+    .logo h1 {
+        font-size: 9.5px !important;
+        white-space: nowrap !important;
+        margin: 0 2px 0 2px !important;
+        display: inline-block !important;
+        line-height: 1 !important;
+        font-weight: 500 !important;
+        color: #ffffff !important;
+    }
+
+    /* 右侧菜单：字号固定 7px，靠近左侧标题，解决间距过远问题 */
+    .nav ul {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 3px !important;
+        margin: 0 0 0 2px !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+        justify-content: flex-start !important;
+    }
+    .nav ul li {
+        display: inline-block !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+    }
+    .nav ul li a {
+        font-size: 7px !important;
+        color: #d8d8d8 !important;
+        white-space: nowrap !important;
+        padding: 1px 2px !important;
+        letter-spacing: 0 !important;
+    }
+    .nav ul li a:hover {
+        color: #ffffff !important;
+    }
+
+    .hero-text-box {
+        gap: 8px !important;
+        padding: 0 8px !important;
+    }
+
+    .hero-title-top {
+        font-size: 1.6rem !important;
+        text-align: left !important;
+        white-space: nowrap !important;
+    }
+
+    .hero-title-bottom {
+        font-size: 2.2rem !important;
+        text-align: right !important;
+        margin-top: 12px !important;
+        white-space: nowrap !important;
+    }
+
+    .scroll-section {
+        min-height: calc(100vh - 53px) !important;
+        height: auto !important;
+        justify-content: flex-start !important;
+        padding: 58px 14px 20px 14px !important;
+        box-sizing: border-box !important;
+    }
+
+    #sec-hero {
+        justify-content: center !important;
+        padding-top: 58px !important;
+    }
+
+    .scroll-hint {
+        bottom: 20px !important;
+    }
+    .scroll-hint span:last-child {
+        font-size: 22px !important;
+        filter: drop-shadow(0 0 8px #00bfff);
+    }
+
+    .section-header {
+        margin-bottom: 14px;
+        width: 100%;
+    }
+
+    .section-header h2 {
+        font-size: 1.4rem;
+    }
+    .section-header p {
+        font-size: 0.85rem;
+    }
+
+    .tech-grid, .cycling-container, .sports-container {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .carousel-box {
+        height: 210px !important;
+        width: 100% !important;
+    }
+
+    .cycling-info, .sport-card, .tech-card {
+        padding: 16px !important;
+    }
+
+    .section-dots {
+        right: 8px;
+        padding: 8px 4px;
+        gap: 10px;
+    }
+    .dot-item {
+        width: 8px;
+        height: 8px;
+    }
+}

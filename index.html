@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ch">
+<html lang="zh-CN">
 
 <style>
 a{color: #d8d8d8;
@@ -12,17 +12,26 @@ a:hover{color: #fff
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>九维的个人主页</title>
     <meta name="baidu-site-verification" content="codeva-DK7ZQePT0x" />
-    <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css"/>
-    <link rel="shortcut icon"type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
+    <meta name="description" content="九维空间（傅天吉）的个人主页 - 电子工程、骑行运动与生活记录" />
+    <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/index-smooth-scroll.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
 </head>
-<body background="img/BG.JPG"style="
-background-repeat:no-repeat;
-background-attachment:fixed;
-background-size:cover;
-background-position:center;
-min-width: 1080px;"> <!--style内为样式,最后一个为居中-->
+
+<body background="img/BG.JPG" style="
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-color: #000000;">
+
+    <!-- 背景深色遮罩层 -->
+    <div class="bg-overlay"></div>
+
+    <!-- 原始导航栏 (永久固定用户精调数值：高度 53px, 左右边距 0, Logo 50px, 菜单字号 7px) -->
     <div class="nav">
         <div class="logo">
             <!--表格实现头部导航栏与logo样式-->
@@ -34,7 +43,7 @@ min-width: 1080px;"> <!--style内为样式,最后一个为居中-->
                     <td width="630px">
                         <ul >
                             <li>
-                                <a  href="index.html" >主页</a>
+                                <a href="index.html">主页</a>
                             </li>
                             <li>
                                 <a href="tool.html">工具</a>
@@ -57,49 +66,199 @@ min-width: 1080px;"> <!--style内为样式,最后一个为居中-->
             </table>
         </div>
     </div>
-<table border="0" width="100%">
-    <tr >
-        <td height="70px"></td>  <td></td>   <td></td>   <td></td>
-    <tr>
-        <td></td>   <td width="578px"><font size="6px" color="white"><h1 align="right">这里是九维空间的</h1></font></td>    <td></td>   <td></td>
-    <tr>
-        <td></td>   <td></td>   <td width="400px"><font size="7px"  color="white" ><h1 >个人网站</h1></font></td>     <td></td>
-    </tr>
 
-</table>
-<div class="foot" style="width: 100%; padding: 10px 0; font-size: 12px;">
-    <div style="
-    text-align: center;
-    position: fixed; /* 改为固定定位，和.foot同级 */
-    bottom: 30px; /* 距离页面底部20像素，可根据需要调整 */
-    left: 0;
-    width: 100%;
-    z-index: 99; /* 确保显示在最顶层 */
-">
-        <a href="message_board.html"
-           style="display:inline-block;
-          background-color:rgba(0, 191, 255, 0.12);
-          color:#529c97;
-          padding:8px 20px;
-          border-radius:6px;
-          text-decoration:none;
-          font-size:14px;
-          border:1px solid rgba(0, 191, 255, 0.25);
-          font-weight:bold;">
-            💬 前往留言板
-        </a>
+    <!-- 右侧滚动指示节点 (小圆点精准同步) -->
+    <div class="section-dots">
+        <div class="dot-item active" data-target="sec-hero" title="欢迎首页"></div>
+        <div class="dot-item" data-target="sec-tech" title="电子专业"></div>
+        <div class="dot-item" data-target="sec-cycling" title="骑行天地"></div>
+        <div class="dot-item" data-target="sec-sports" title="跑步羽球"></div>
+        <div class="dot-item" data-target="sec-footer" title="互动页脚"></div>
     </div>
 
-    <div style="color: #333; margin-bottom: 5px;">
-        &copy; 九维空间(傅天吉）版权所有
-    </div>
-    <div style="display: block; text-align: right;">
-        <a href="https://beian.miit.gov.cn/" target="_blank" style="color: #666; text-decoration: none; font-size: 12px;">
-            冀ICP备2025103423号
-        </a>
-    </div>
-</div>
+    <!-- SECTION 1: 首屏 (左上主标题“这里是九维空间的” + 空一行 + 右下“个人网站”) -->
+    <section id="sec-hero" class="scroll-section">
+        <div class="hero-text-box">
+            <h2 class="hero-title-top">这里是九维空间的</h2>
+            <h1 class="hero-title-bottom">个人网站</h1>
+        </div>
 
+        <div class="scroll-hint">
+            <span>滑动滚轮解锁个人风采</span>
+            <span style="font-size: 18px; color: #00bfff;">↓</span>
+        </div>
+    </section>
 
+    <!-- SECTION 2: ⚡ 电子工程与专业爱好 -->
+    <section id="sec-tech" class="scroll-section">
+        <div class="section-header">
+            <h2>⚡ 电子工程 & 硬件开发</h2>
+            <p>热衷于电路设计、嵌入式系统与软硬件结合的极客探索</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="glass-card tech-card">
+                <div class="tech-icon">🔌</div>
+                <h3>嵌入式 & 硬件设计</h3>
+                <p>
+                    专注于单片机系统开发与电路原理图设计。熟练进行电子元器件焊接、PCB 画板与电路调试，享受将代码转化为物理硬件运行的成就感。
+                </p>
+                <div class="tech-tags">
+                    <span class="tag-badge">STM32 / ESP32</span>
+                    <span class="tag-badge">PCB 设计</span>
+                    <span class="tag-badge">电路调试</span>
+                    <span class="tag-badge">传感器应用</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="tech-icon">💻</div>
+                <h3>编程与系统开发</h3>
+                <p>
+                    具备扎实的底层 C/C++ 语言基础，熟悉 Python 自动化脚本与 Web 辅助开发。喜欢探索新工具与软硬件一体化解决方案。
+                </p>
+                <div class="tech-tags">
+                    <span class="tag-badge">C / C++</span>
+                    <span class="tag-badge">Python</span>
+                    <span class="tag-badge">Linux 基础</span>
+                    <span class="tag-badge">Git 版本控制</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="tech-icon">🛠️</div>
+                <h3>电子极客探索</h3>
+                <p>
+                    喜欢动手组装与改造硬件设备，动手能力强。无论是仪器测试、模块搭建还是自动化小工具，都保持着强烈的好奇心与钻研精神。
+                </p>
+                <div class="tech-tags">
+                    <span class="tag-badge">示波器 / 仪器测试</span>
+                    <span class="tag-badge">动手改造</span>
+                    <span class="tag-badge">开源硬件</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: 🚴‍♂️ 骑行风采 (相册轮播展示) -->
+    <section id="sec-cycling" class="scroll-section">
+        <div class="section-header">
+            <h2>🚴‍♂️ 骑行天地 (Cycling Showcase)</h2>
+            <p>用双轮丈量大地，感受风的呼吸与远方的风景</p>
+        </div>
+
+        <div class="cycling-container">
+            <!-- 轮播图相册框 -->
+            <div class="carousel-box">
+                <img src="img/cycling1.jpg" class="carousel-img active" alt="骑行风采照片 1">
+                <img src="img/cycling2.jpg" class="carousel-img" alt="骑行风采照片 2">
+
+                <!-- 轮播控制按钮 -->
+                <button class="carousel-btn carousel-prev" aria-label="上一张">❮</button>
+                <button class="carousel-btn carousel-next" aria-label="下一张">❯</button>
+
+                <!-- 指示圆点 -->
+                <div class="carousel-indicators">
+                    <div class="carousel-dot active"></div>
+                    <div class="carousel-dot"></div>
+                </div>
+            </div>
+
+            <!-- 骑行介绍卡片 -->
+            <div class="glass-card cycling-info">
+                <h3 style="font-size: 1.5rem; color: #00bfff; margin: 0;">追风之旅与装备记录</h3>
+                <p style="color: #d8d8d8; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                    骑行是我最热爱的户外运动之一。无论是清晨公路上的极速巡航，还是周末穿梭于山林长途远行，骑行总能带给我源源不断的专注与自由感。
+                </p>
+
+                <div class="cycling-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">爱车公路骑</div>
+                        <div class="stat-label">装备与车友同行</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">长途 & 巡航</div>
+                        <div class="stat-label">探索沿途好风光</div>
+                    </div>
+                </div>
+
+                <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 5px;">
+                    💡 提示：这里预留了多张照片展位，后续可以随时替换为你自己的骑行大片！
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: 🏃‍♂️ 跑步与羽毛球 -->
+    <section id="sec-sports" class="scroll-section">
+        <div class="section-header">
+            <h2>🏃‍♂️ 跑步 & 🏸 羽毛球</h2>
+            <p>保持活力，享受汗水与竞技带来的快乐</p>
+        </div>
+
+        <div class="sports-container">
+            <div class="glass-card sport-card">
+                <span class="sport-badge badge-run">🏃‍♂️ 跑步热爱</span>
+                <h3 style="font-size: 1.4rem; color: #00bfff; margin: 0;">晨跑与体能训练</h3>
+                <p style="color: #d8d8d8; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                    跑步是锻炼意志力与保持良好体能的最好方式。喜欢在晨光或夜晚沿着跑道有节奏地前进，用汗水释放压力，维持清醒敏捷的思考状态。
+                </p>
+                <div style="background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; font-size: 0.85rem; color: #00bfff;">
+                    ✨ 跑步感悟：每一步脚踏实地，都是对自我节奏的掌控。
+                </div>
+            </div>
+
+            <div class="glass-card sport-card">
+                <span class="sport-badge badge-badminton">🏸 羽毛球竞技</span>
+                <h3 style="font-size: 1.4rem; color: #00bfff; margin: 0;">球场挥拍与竞技</h3>
+                <p style="color: #d8d8d8; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                    羽毛球是一项兼具反应速度、爆发力与战术配合的运动。喜欢在球场上快速移动、精准扣杀，享受与球友切磋配合的激烈与快乐。
+                </p>
+                <div style="background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; font-size: 0.85rem; color: #00bfff;">
+                    🏸 球场时光：迅速反应、默契配合，享受击球的清脆声响。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: 💬 尾页与互动 -->
+    <section id="sec-footer" class="scroll-section" style="justify-content: space-between;">
+        <div></div>
+
+        <div style="text-align: center; max-width: 600px;">
+            <h2 style="font-size: 2.2rem; margin-bottom: 15px; color: #ffffff;">欢迎交流与留言</h2>
+            <p style="color: #d8d8d8; font-size: 1rem; margin-bottom: 30px;">
+                如果你对电子硬件、骑行路线或我的项目感兴趣，欢迎在留言板留下你的想法！
+            </p>
+
+            <a href="message_board.html" style="
+                display: inline-block;
+                background-color: rgba(0, 191, 255, 0.15);
+                color: #00bfff;
+                padding: 12px 32px;
+                border-radius: 6px;
+                text-decoration: none;
+                font-size: 16px;
+                border: 1px solid rgba(0, 191, 255, 0.4);
+                font-weight: bold;">
+                💬 前往留言板交流
+            </a>
+        </div>
+
+        <div class="foot" style="position: static; height: auto; padding: 20px 0; font-size: 12px; width: 100%; text-align: center;">
+            <div style="color: #d8d8d8; margin-bottom: 5px;">
+                &copy; 九维空间 (傅天吉) 版权所有
+            </div>
+            <div style="display: block; text-align: center;">
+                <a href="https://beian.miit.gov.cn/" target="_blank" style="color: #666; text-decoration: none; font-size: 12px;">
+                    冀ICP备2025103423号
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 引入全屏翻页与交互逻辑脚本 -->
+    <script src="scripts/index-smooth-scroll.js"></script>
 </body>
+
 </html>
