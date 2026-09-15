@@ -58,6 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         carouselImages.forEach((img, i) => {
             img.classList.toggle('active', i === currentIndex);
+            if (i === currentIndex) {
+                const bg = document.querySelector('.carousel-bg');
+                if (bg) bg.style.backgroundImage = 'url(' + img.src + ')';
+            }
         });
 
         carouselDots.forEach((dot, i) => {
