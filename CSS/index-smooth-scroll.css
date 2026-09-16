@@ -63,6 +63,10 @@ html, body {
     }
 }
 
+#sec-hero {
+    justify-content: center !important;
+}
+
 .scroll-section {
     min-height: 100vh;
     min-height: 100dvh;
@@ -526,6 +530,10 @@ html, body {
         white-space: nowrap !important;
     }
 
+#sec-hero {
+    justify-content: center !important;
+}
+
     .scroll-section {
         min-height: 100vh !important;
         min-height: 100dvh !important;
@@ -599,4 +607,9 @@ html, body {
     filter: blur(15px) brightness(0.4);
     z-index: 0;
     transition: background-image 0.5s ease-in-out;
+}
+
+/* Fix for hero section being hidden under navbar */
+#sec-hero {
+    justify-content: center !important;
 }
