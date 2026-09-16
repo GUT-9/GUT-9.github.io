@@ -1,6 +1,20 @@
 // index-smooth-scroll.js - 侧边指示点精准同步与骑行相册轮播
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 动态监听导航栏高度以设置 CSS 变量，确保滚动避让精确无误
+    const navBar = document.querySelector('.nav');
+    if (navBar) {
+        function updateNavHeight() {
+            document.documentElement.style.setProperty(
+                '--nav-height',
+                `${navBar.getBoundingClientRect().height}px`
+            );
+        }
+        updateNavHeight();
+        const resizeObserver = new ResizeObserver(updateNavHeight);
+        resizeObserver.observe(navBar);
+    }
+
     const sections = document.querySelectorAll('.scroll-section');
     const dots = document.querySelectorAll('.dot-item');
 
