@@ -17,8 +17,11 @@ a:hover{color: #fff
     <meta name="baidu-site-verification" content="codeva-DK7ZQePT0x" />
     <meta name="description" content="九维空间（傅天吉）的个人主页 - 电子工程、骑行运动与生活记录" />
     <link rel="stylesheet" type="text/css" href="CSS/MyStyle.css" />
-    <link rel="stylesheet" type="text/css" href="CSS/index-smooth-scroll.css?v=102" />
+    <link rel="stylesheet" type="text/css" href="CSS/index-smooth-scroll.css?v=103" />
     <link rel="shortcut icon" type="image/x-icon" href="img/MyImage/GUT9.jpg" media="screen">
+    
+    <!-- 加速首屏加载：预加载极占带宽的大背景图 -->
+    <link rel="preload" as="image" href="img/BG.JPG">
 </head>
 
 <body background="img/BG.JPG" style="
@@ -37,7 +40,7 @@ a:hover{color: #fff
             <!--表格实现头部导航栏与logo样式-->
             <table border="0" width="100%">
                 <tr>
-                    <td width="148px"> <img src="img/MyImage/GUT9.png"></td>
+                    <td width="148px"> <img src="img/MyImage/GUT9.png" fetchpriority="high"></td>
                     <td width="270px" ><h1 align="left" >九维空间的个人主页</h1></td>
                     <td ></td>
                     <td width="630px">
@@ -151,9 +154,9 @@ a:hover{color: #fff
             <!-- 轮播图相册框 -->
             <div class="carousel-box">
                 <div class="carousel-bg"></div>
-                <img src="img/bike1.jpg" class="carousel-img active" alt="骑行风采照片 1">
-                <img src="img/bike2.png" class="carousel-img" alt="骑行风采照片 2">
-                <img src="img/bike3.jpg" class="carousel-img" alt="骑行风采照片 3">
+                <img src="img/bike1.jpg" class="carousel-img active" alt="骑行风采照片 1" loading="lazy" decoding="async">
+                <img src="img/bike2.png" class="carousel-img" alt="骑行风采照片 2" loading="lazy" decoding="async">
+                <img src="img/bike3.jpg" class="carousel-img" alt="骑行风采照片 3" loading="lazy" decoding="async">
 
                 <!-- 轮播控制按钮 -->
                 <button class="carousel-btn carousel-prev" aria-label="上一张">❮</button>
@@ -254,7 +257,7 @@ a:hover{color: #fff
  -->
 
     <!-- 引入全屏翻页与交互逻辑脚本 -->
-    <script src="scripts/index-smooth-scroll.js?v=102"></script>
+    <script src="scripts/index-smooth-scroll.js?v=103"></script>
 </body>
 
 </html>
