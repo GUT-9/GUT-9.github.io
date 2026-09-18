@@ -6,7 +6,6 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: var(--safe-top);
 }
 
 /* index-smooth-scroll.css - 永久固定用户精调数值与紧凑间距排版 */
@@ -79,8 +78,7 @@ html, body {
     align-items: center;
     position: relative;
     box-sizing: border-box;
-    padding: 30px 40px 50px 40px;
-    scroll-margin-top: var(--safe-top);
+    padding: calc(var(--safe-top) + 10px) 40px 50px 40px;
     z-index: 2;
 }
 
@@ -539,7 +537,7 @@ html, body {
         min-height: 100dvh !important;
         height: auto !important;
         justify-content: flex-start !important;
-        padding: 24px 14px 20px 14px !important;
+        padding: calc(var(--safe-top) + 10px) 14px 20px 14px !important;
         box-sizing: border-box !important;
     }
 
@@ -610,6 +608,10 @@ html, body {
 }
 
 /* Fix for hero section being hidden under navbar */
+#sec-hero {
+    justify-content: center !important;
+}
+
 #sec-hero {
     justify-content: center !important;
 }
