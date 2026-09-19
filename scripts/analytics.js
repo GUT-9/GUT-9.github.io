@@ -5,150 +5,229 @@
 
     const VISITOR_KEY = "gut9_visitor_id";
     const SESSION_KEY = "gut9_session";
-    const SESSION_TIMEOUT = 30 * 60 * 1000;
+
+    const SESSION_TIMEOUT =
+        30 * 60 * 1000;
 
 
+    // =========================================================
+    // Visitor ID
+    // =========================================================
     function getVisitorId() {
-        let id = localStorage.getItem(VISITOR_KEY);
+
+        let id =
+            localStorage.getItem(
+                VISITOR_KEY
+            );
 
         if (!id) {
-            id = crypto.randomUUID();
-            localStorage.setItem(VISITOR_KEY, id);
+            id =
+                crypto.randomUUID();
+
+            localStorage.setItem(
+                VISITOR_KEY,
+                id
+            );
         }
 
         return id;
     }
 
 
-    function getLocation() {
-    return new Promise((resolve) => {
+    // =========================================================
+    // Session ID
+    // =========================================================
+    function getSessionId() {
 
-        if (!navigator.geolocation) {
-            resolve({
-                status: "unsupported"
-            });
-            return;
+        const now =
+            Date.now();
+
+        let session =
+            null;
+
+        try {
+            session =
+                JSON.parse(
+                    localStorage.getItem(
+                        SESSION_KEY
+                    )
+                );
+        } catch (e) {
+            session =
+                null;
         }
 
-        navigator.geolocation.getCurrentPosition(
 
-            (position) => {
-                resolve({
-                    status: "granted",
+        if (
+            !session ||
+            !session.id ||
+            !session.last_active ||
+            now -
+                session.last_active >
+                SESSION_TIMEOUT
+        ) {
 
-                    latitude:
-                        position.coords.latitude,
+            session = {
+                id:
+                    crypto.randomUUID(),
 
-                    longitude:
-                        position.coords.longitude,
+                last_active:
+                    now
+            };
 
-                    accuracy:
-                        position.coords.accuracy
-                });
-            },
+        } else {
 
-            (error) => {
-                let status = "failed";
+            session.last_active =
+                now;
+        }
 
-                if (error.code === 1) {
-                    status = "denied";
-                } else if (error.code === 2) {
-                    status = "unavailable";
-                } else if (error.code === 3) {
-                    status = "timeout";
-                }
 
-                resolve({
-                    status: status
-                });
-            },
-
-            {
-                // 请求尽可能高精度的位置
-                enableHighAccuracy: true,
-
-                // 最多等 10 秒
-                timeout: 10000,
-
-                // 尽量不要使用旧缓存位置
-                maximumAge: 0
-            }
+        localStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify(
+                session
+            )
         );
-    });
-}
 
-
-    // =========================================================
-    // 获取浏览器真实定位
-    // =========================================================
-    function getLocation() {
-        return new Promise((resolve) => {
-
-            if (!navigator.geolocation) {
-                resolve({
-                    status: "unsupported"
-                });
-                return;
-            }
-
-            navigator.geolocation.getCurrentPosition(
-
-                // 用户允许，并成功取得定位
-                (position) => {
-                    resolve({
-                        status: "granted",
-
-                        latitude:
-                            position.coords.latitude,
-
-                        longitude:
-                            position.coords.longitude,
-
-                        accuracy:
-                            position.coords.accuracy
-                    });
-                },
-
-                // 用户拒绝、超时或定位失败
-                (error) => {
-                    let status = "failed";
-
-                    if (error.code === 1) {
-                        status = "denied";
-                    } else if (error.code === 2) {
-                        status = "unavailable";
-                    } else if (error.code === 3) {
-                        status = "timeout";
-                    }
-
-                    resolve({
-                        status: status
-                    });
-                },
-
-                {
-                    // 城市级定位足够
-                    enableHighAccuracy: false,
-
-                    // 最多等待 8 秒
-                    timeout: 8000,
-
-                    // 允许使用 10 分钟内的缓存定位
-                    maximumAge: 10 * 60 * 1000
-                }
-            );
-        });
+        return session.id;
     }
 
 
+    // =========================================================
+    // 获取浏览器定位
+    //
+    // enableHighAccuracy = true
+    // 尽量使用 GPS / Wi-Fi 等更高精度定位
+    //
+    // 用户拒绝不会导致统计失败，
+    // 后端会自动退回 IP 省份定位。
+    // =========================================================
+    function getLocation() {
+
+        return new Promise(
+            (resolve) => {
+
+                if (
+                    !navigator.geolocation
+                ) {
+                    resolve({
+                        status:
+                            "unsupported"
+                    });
+
+                    return;
+                }
+
+
+                navigator.geolocation
+                    .getCurrentPosition(
+
+                        // -----------------------------
+                        // 定位成功
+                        // -----------------------------
+                        (position) => {
+
+                            resolve({
+                                status:
+                                    "granted",
+
+                                latitude:
+                                    position
+                                        .coords
+                                        .latitude,
+
+                                longitude:
+                                    position
+                                        .coords
+                                        .longitude,
+
+                                accuracy:
+                                    position
+                                        .coords
+                                        .accuracy
+                            });
+
+                        },
+
+
+                        // -----------------------------
+                        // 定位失败
+                        // -----------------------------
+                        (error) => {
+
+                            let status =
+                                "failed";
+
+
+                            if (
+                                error.code === 1
+                            ) {
+                                status =
+                                    "denied";
+
+                            } else if (
+                                error.code === 2
+                            ) {
+                                status =
+                                    "unavailable";
+
+                            } else if (
+                                error.code === 3
+                            ) {
+                                status =
+                                    "timeout";
+                            }
+
+
+                            resolve({
+                                status:
+                                    status
+                            });
+
+                        },
+
+
+                        // -----------------------------
+                        // 定位参数
+                        // -----------------------------
+                        {
+                            // 请求尽可能高的精度
+                            enableHighAccuracy:
+                                true,
+
+                            // 最多等待 10 秒
+                            timeout:
+                                10000,
+
+                            // 不使用旧缓存位置
+                            maximumAge:
+                                0
+                        }
+                    );
+            }
+        );
+    }
+
+
+    // =========================================================
+    // 发送统计
+    // =========================================================
     async function sendAnalytics() {
+
         try {
 
-            // 先请求一次浏览器定位
+            // ---------------------------------------------
+            // 先尝试获取位置
+            // ---------------------------------------------
             const location =
                 await getLocation();
 
+
+            // ---------------------------------------------
+            // 构造统计数据
+            // ---------------------------------------------
             const payload = {
+
                 visitor_id:
                     getVisitorId(),
 
@@ -162,10 +241,12 @@
                     document.title,
 
                 referrer:
-                    document.referrer || "",
+                    document.referrer ||
+                    "",
 
                 language:
-                    navigator.language || "",
+                    navigator.language ||
+                    "",
 
                 screen_width:
                     window.screen.width,
@@ -173,27 +254,37 @@
                 screen_height:
                     window.screen.height,
 
-                // 定位权限状态
+
+                // -----------------------------------------
+                // 定位
+                // -----------------------------------------
                 location_status:
                     location.status,
 
-                // 只有授权成功时才有这些字段
                 gps_latitude:
-                    location.latitude ?? null,
+                    location.latitude ??
+                    null,
 
                 gps_longitude:
-                    location.longitude ?? null,
+                    location.longitude ??
+                    null,
 
+                // 单位：米
                 gps_accuracy:
-                    location.accuracy ?? null
+                    location.accuracy ??
+                    null
             };
 
 
+            // ---------------------------------------------
+            // 发送
+            // ---------------------------------------------
             const response =
                 await fetch(
                     ANALYTICS_ENDPOINT,
                     {
-                        method: "POST",
+                        method:
+                            "POST",
 
                         headers: {
                             "Content-Type":
@@ -201,14 +292,19 @@
                         },
 
                         body:
-                            JSON.stringify(payload),
+                            JSON.stringify(
+                                payload
+                            ),
 
-                        keepalive: true
+                        keepalive:
+                            true
                     }
                 );
 
 
-            if (!response.ok) {
+            if (
+                !response.ok
+            ) {
                 console.warn(
                     "GUT9 Analytics:",
                     response.status,
@@ -217,6 +313,8 @@
             }
 
         } catch (error) {
+
+            // 统计系统不能影响网站正常使用
             console.debug(
                 "GUT9 Analytics unavailable:",
                 error
@@ -225,12 +323,21 @@
     }
 
 
-    if (document.readyState === "loading") {
+    // =========================================================
+    // 页面加载完成后执行
+    // =========================================================
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
         document.addEventListener(
             "DOMContentLoaded",
             sendAnalytics
         );
+
     } else {
+
         sendAnalytics();
     }
 
