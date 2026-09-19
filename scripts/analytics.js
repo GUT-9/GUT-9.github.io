@@ -20,39 +20,62 @@
     }
 
 
-    function getSessionId() {
-        const now = Date.now();
-        let session = null;
+    function getLocation() {
+    return new Promise((resolve) => {
 
-        try {
-            session = JSON.parse(
-                localStorage.getItem(SESSION_KEY)
-            );
-        } catch (e) {
-            session = null;
+        if (!navigator.geolocation) {
+            resolve({
+                status: "unsupported"
+            });
+            return;
         }
 
-        if (
-            !session ||
-            !session.id ||
-            !session.last_active ||
-            now - session.last_active > SESSION_TIMEOUT
-        ) {
-            session = {
-                id: crypto.randomUUID(),
-                last_active: now
-            };
-        } else {
-            session.last_active = now;
-        }
+        navigator.geolocation.getCurrentPosition(
 
-        localStorage.setItem(
-            SESSION_KEY,
-            JSON.stringify(session)
+            (position) => {
+                resolve({
+                    status: "granted",
+
+                    latitude:
+                        position.coords.latitude,
+
+                    longitude:
+                        position.coords.longitude,
+
+                    accuracy:
+                        position.coords.accuracy
+                });
+            },
+
+            (error) => {
+                let status = "failed";
+
+                if (error.code === 1) {
+                    status = "denied";
+                } else if (error.code === 2) {
+                    status = "unavailable";
+                } else if (error.code === 3) {
+                    status = "timeout";
+                }
+
+                resolve({
+                    status: status
+                });
+            },
+
+            {
+                // 请求尽可能高精度的位置
+                enableHighAccuracy: true,
+
+                // 最多等 10 秒
+                timeout: 10000,
+
+                // 尽量不要使用旧缓存位置
+                maximumAge: 0
+            }
         );
-
-        return session.id;
-    }
+    });
+}
 
 
     // =========================================================
