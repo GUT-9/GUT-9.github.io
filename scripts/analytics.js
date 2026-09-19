@@ -1,15 +1,15 @@
 (function () {
     "use strict";
 
-    const ANALYTICS_ENDPOINT =
-        "https://gut9-analytics.futianji0702.workers.dev/collect";
+    // 统计请求统一走本站 EdgeOne 中继
+    const ANALYTICS_ENDPOINT = "/api/collect";
 
     const VISITOR_KEY = "gut9_visitor_id";
     const SESSION_KEY = "gut9_session";
     const SESSION_TIMEOUT = 30 * 60 * 1000; // 30分钟
 
 
-    // 获取/创建设备（浏览器）ID
+    // 获取 / 创建设备（浏览器）ID
     function getVisitorId() {
         let id = localStorage.getItem(VISITOR_KEY);
 
@@ -22,7 +22,7 @@
     }
 
 
-    // 获取/创建 Session
+    // 获取 / 创建 Session
     function getSessionId() {
         const now = Date.now();
         let session = null;
@@ -91,7 +91,7 @@
                 }
             );
 
-            // 调试阶段保留
+            // 请求失败只输出调试信息，不影响页面
             if (!response.ok) {
                 console.warn(
                     "GUT9 Analytics:",
